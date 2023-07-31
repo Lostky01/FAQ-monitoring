@@ -1,0 +1,133 @@
+[20-Jun-2022 22:55:56 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[20-Jun-2022 22:55:56 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[20-Jun-2022 22:55:56 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 7
+[20-Jun-2022 22:55:56 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:7
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 7
+[20-Jun-2022 22:57:45 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[20-Jun-2022 22:57:45 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[20-Jun-2022 22:57:45 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 7
+[20-Jun-2022 22:57:45 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:7
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 7
+[21-Jun-2022 00:17:31 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 00:17:31 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 00:17:31 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 7
+[21-Jun-2022 00:17:31 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:7
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 7
+[21-Jun-2022 00:25:43 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 00:25:43 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 00:25:43 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 00:25:43 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:36:11 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:36:11 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:36:11 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 7
+[21-Jun-2022 01:36:11 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:7
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 7
+[21-Jun-2022 01:40:40 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:40:40 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:40:40 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:40:40 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:41:03 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:41:03 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:41:03 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:41:03 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:41:32 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:41:32 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:41:32 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:41:32 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:47:10 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:47:10 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:47:10 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:47:10 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:57:19 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:57:19 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:57:19 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:57:19 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:58:43 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:58:43 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:58:43 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:58:43 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:59:14 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:59:14 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:59:14 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:59:14 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:59:54 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:59:54 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 01:59:54 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 01:59:54 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:01:00 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:01:00 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:01:00 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:01:00 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:02:00 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:02:00 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:02:00 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:02:00 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:05:27 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:05:27 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:05:27 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:05:27 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:07:39 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:07:39 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:07:39 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:07:39 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:13:03 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:13:03 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:13:03 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:13:03 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:18:49 America/Boise] PHP Warning:  include(koneksi.php): Failed to open stream: No such file or directory in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:18:49 America/Boise] PHP Warning:  include(): Failed opening 'koneksi.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 2
+[21-Jun-2022 02:18:49 America/Boise] PHP Warning:  Undefined variable $db1 in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12
+[21-Jun-2022 02:18:49 America/Boise] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/lobaldf7/public_html/monitoring.globaldeva.com/resources/views/cases/get_user.php on line 12

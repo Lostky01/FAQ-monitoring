@@ -1,0 +1,179 @@
+.home {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .home .div-2 {
+    background-color: #ffffff;
+    border: 1px none;
+    height: 860px;
+    overflow: hidden;
+    position: relative;
+    width: 1440px;
+  }
+  
+  .home .menu-instance {
+    height: 15px !important;
+    left: 49px !important;
+    top: 46px !important;
+    width: 22px !important;
+  }
+  
+  .home .image {
+    height: 95px;
+    left: 435px;
+    object-fit: cover;
+    position: absolute;
+    top: 179px;
+    width: 570px;
+  }
+  
+  .home .picsart-22-12-12-17-14-27-186-1-1 {
+    background-image: url(./picsart-22-12-12-17-14-27-186-1-1-2.png) !important;
+    left: 1343px !important;
+    position: absolute !important;
+    top: 29px !important;
+  }
+  
+  .home .overlap-2 {
+    background-color: #f2f2f2;
+    border: 1px solid;
+    border-color: #dadce0;
+    height: 52px;
+    left: -1px;
+    position: absolute;
+    top: 809px;
+    width: 1442px;
+  }
+  
+  .home .terms-instance {
+    left: 1362px !important;
+    position: absolute !important;
+    top: 16px !important;
+  }
+  
+  .home .privacy-instance {
+    left: 1257px !important;
+    position: absolute !important;
+    top: 16px !important;
+  }
+  
+  .home .help-instance {
+    left: 1172px !important;
+    position: absolute !important;
+    top: 16px !important;
+  }
+  
+  .home .component {
+    left: 34px !important;
+    position: absolute !important;
+    top: 14px !important;
+  }
+  
+  .home .my-library-instance {
+    left: 1211px !important;
+    position: absolute !important;
+    top: 46px !important;
+  }
+  
+  .home .my-profile-instance {
+    left: 1092px !important;
+    position: absolute !important;
+    top: 46px !important;
+  }
+  
+  .home .searchbar-instance {
+    left: 372px !important;
+    position: absolute !important;
+    top: 284px !important;
+  }
+  
+  .home .design-component-instance-node {
+    background-image: url(./vector-4.svg) !important;
+    left: 658px !important;
+    position: absolute !important;
+    top: 13px !important;
+  }
+  
+  .home .p {
+    color: #126621;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 569px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 512px;
+    white-space: nowrap;
+    width: 303px;
+  }
+  
+  .home .component-2 {
+    height: 126px;
+    left: 602px;
+    position: absolute;
+    top: 379px;
+    width: 236px;
+  }
+  
+  .home .div-wrapper {
+    background-color: #2e7be7;
+    border-radius: 3px 0px 0px 3px;
+    height: 36px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 115px;
+  }
+  
+  .home .text-wrapper-7 {
+    color: #ffffff;
+    font-family: "Inter-ExtraBold", Helvetica;
+    font-size: 16px;
+    font-weight: 800;
+    left: 25px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 10px;
+    white-space: nowrap;
+    width: 66px;
+  }
+  
+  .home .overlap-3 {
+    border: 1px solid;
+    border-color: #3686f7;
+    border-radius: 0px 3px 0px 0px;
+    height: 36px;
+    left: 115px;
+    position: absolute;
+    top: 0;
+    width: 121px;
+  }
+  
+  .home .img {
+    height: 4px;
+    left: 93px;
+    position: absolute;
+    top: 18px;
+    width: 8px;
+  }
+  
+  .home .text-wrapper-8 {
+    color: #3686f7;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    left: 19px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 8px;
+    white-space: nowrap;
+    width: 78px;
+  }
+  

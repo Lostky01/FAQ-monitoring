@@ -159,12 +159,10 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <!-- Pertanyaan -->
                                 <div class="col-sm-5">
                                     <label for="title" class="form-label">Pertanyaan</label>
                                     <textarea id="mytextarea_pertanyaan" class="form-control" name="pertanyaan">{{ old('pertanyaan') }}</textarea>
                                 </div>
-                                <!-- Jawaban -->
                                 <div class="col-sm-5">
                                     <label for="description" class="form-label">Jawaban</label>
                                     <textarea id="mytextarea_jawaban" class="form-control" name="jawaban">{{ old('jawaban') }}</textarea>
@@ -174,7 +172,6 @@
                             <button type="button" id="PlusImage" onclick="AddDropify()" class="btn btn-primary">
                                 + Tambah Gambar
                             </button>
-
                             <div class="row mb-3">
                                 <!-- Image 1 -->
                                 <div class="col-sm-3">
@@ -186,7 +183,7 @@
                                     <input type="file" class="dropify" name="image_1" data-max-file-size="1M"
                                         data-allowed-file-extensions="jpg jpeg png gif" image_list="1" data-default-file="">
                                 </div>
-                                <!-- Additional Images -->
+                                {{-- class buat nambah col dropify setiap diulang, biar horizontal posisinya --}}
                                 <div class="col-sm-3" id="additional_images">
 
                                 </div>

@@ -1,7 +1,10 @@
 @extends('layouts.app-front')
 
 @section('css')
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <style>
         .table {
@@ -154,6 +157,107 @@
             width: 100%;
             max-width: 150px;
         }
+
+        .modal-confirm {
+            color: #636363;
+            width: 400px;
+        }
+
+        .modal-confirm .modal-content {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+        }
+
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 -10px;
+        }
+
+        .modal-confirm .close {
+            position: absolute;
+            top: -5px;
+            right: -2px;
+        }
+
+        .modal-confirm .modal-body {
+            color: #999;
+        }
+
+        .modal-confirm .modal-footer {
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 13px;
+            padding: 10px 15px 25px;
+        }
+
+        .modal-confirm .modal-footer a {
+            color: #999;
+        }
+
+        .modal-confirm .icon-box {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            border-radius: 50%;
+            z-index: 9;
+            text-align: center;
+            border: 3px solid #B0D88F;
+        }
+
+        .modal-confirm .icon-box i {
+            color: #f15e5e;
+            font-size: 46px;
+            display: inline-block;
+            margin-top: 13px;
+        }
+
+        .modal-confirm .btn,
+        .modal-confirm .btn:active {
+            color: #fff;
+            border-radius: 4px;
+            background: #60c7c1;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            min-width: 120px;
+            border: none;
+            min-height: 40px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+
+        .modal-confirm .btn-secondary {
+            background: #c1c1c1;
+        }
+
+        .modal-confirm .btn-secondary:hover,
+        .modal-confirm .btn-secondary:focus {
+            background: #a8a8a8;
+        }
+
+        .modal-confirm .btn-danger {
+            background: #f15e5e;
+        }
+
+        .modal-confirm .btn-danger:hover,
+        .modal-confirm .btn-danger:focus {
+            background: #ee3535;
+        }
+
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
+        }
     </style>
 @endsection
 
@@ -166,7 +270,8 @@
             </div>
             <div class="table-responsive">
                 <div class="col-md-4" style="margin-left: 85%">
-                    <a href="{{ route('FAQ.create') }}" class="btn btn-success" style=" background-color: #FFB22B" >+ Add FAQ</a>
+                    <a href="{{ route('FAQ.create') }}" class="btn btn-success" style=" background-color: #FFB22B">+ Add
+                        FAQ</a>
                 </div>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>
@@ -201,13 +306,14 @@
                                 <td>
                                     <div class="btn-group w-100" role="group" aria-label="Third group">
                                         <a class="btn btn-outline-secondary btn-rounded w-100"
-                                        href="{{ route('FAQ.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit</a>
-                                        <form action="{{ route('FAQ.delete', $item->id) }}" method="POST"
-                                            onsubmit="return confirm('Hapus Info Ini?')">
+                                            href="{{ route('FAQ.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit</a>
+                                        <form action="{{ route('FAQ.delete', $item->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger btn-rounded w-100"><i
-                                                    class="fa fa-trash"></i> Hapus</button>
+                                            <button type="button"
+                                                class="btn btn-outline-danger btn-rounded w-100 delete-btn"
+                                                data-toggle="modal" data-target="#myModal2"><i class="fa fa-trash"></i>
+                                                Hapus</button>
                                         </form>
                                     </div>
                                 </td>
@@ -223,11 +329,33 @@
         <div class="modal-content" id="modalContent">
         </div>
     </div>
+    <div id="myModal2" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header flex-column">
+                    <div class="icon-box" >
+                        <i class="material-icons" style="color: #B0D88F">&#xE5CA;</i> 
+                    </div>
+                    <h4 class="modal-title w-100">HAPUS !</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda Yakin ?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" style="background-color: #6B6BD9">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js_after')
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             let baseid = <?= json_encode($baseid) ?>;
@@ -262,6 +390,9 @@
                 modalContent.appendChild(imageGrid);
                 modal.style.display = "block";
             }); */
+            $('.delete-btn').click(function() {
+                $('#myModal2').modal('show');
+            });
 
             $(".info-button").click(function() {
                 var images = $(this).data("images");

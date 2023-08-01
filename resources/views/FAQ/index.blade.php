@@ -1,8 +1,7 @@
 @extends('layouts.app-front')
 
 @section('css')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    
 
     <style>
         .table {
@@ -166,8 +165,8 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <div class="col-md-4">
-                    <a href="{{ route('FAQ.create') }}" class="btn btn-success">Tambah Data</a>
+                <div class="col-md-4" style="margin-left: 85%">
+                    <a href="{{ route('FAQ.create') }}" class="btn btn-success" style=" background-color: #FFB22B" >+ Add FAQ</a>
                 </div>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>

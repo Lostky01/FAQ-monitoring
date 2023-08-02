@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 @endsection
 
-@section('content')
+
 @section('content')
     <section class="service-one my-5">
         <div class="container-fluid">
@@ -19,6 +19,9 @@
                             <div class="block-title__text"><span>FAQ</span></div>
                         </div>
                         <div class="col-md-4" style="margin-left: 85%">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Search">
+                            </div>
                             <a href="{{ route('FAQ.create') }}" class="btn btn-success"
                                 style="width: 30%; text-align: center; height:10%; background-color: #FFB22B">+
                                 Add
@@ -38,7 +41,7 @@
                                                 <td>
                                                     <p><strong>Q:</strong> {!! strip_tags($item->pertanyaan) !!}</p>
                                                     <p><strong>A:</strong> {!! strip_tags($item->jawaban) !!}</p>
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-5" style="margin-right:40%">
                                                         <span class="badge bg-default">{{ $item->created_at }}</span>
                                                         <span style="color: white" class="badge bg-success">{{ strip_tags($item->id_site) }}</span>
                                                         <form action="{{ route('FAQ.delete', $item->id) }}" method="POST" style="display: inline">
@@ -51,30 +54,28 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="col-sm-5">
-                                                        DUARR 
-                                                    @php
-                                                        if ($item->image_url) {
-                                                            $image = 'image_url';
-                                                            $images = asset('image_info/' . $item->$image);
-                                                            if ($item->$image . $no) {
-                                                                $images = [];
-                                                                for($i = 1; $i < 2; $i++) {
+                                                    <div class="col-sm-5 d-flex justify-content-start">
+                                                        @php
+                                                            if ($item->image_url) {
+                                                                $image = 'image_url';
+                                                                $images = [asset('image_info/' . $item->$image)];
+                                                                for($i = 1; $i <= 2; $i++) {
                                                                     $image = 'image_url' . $i;
                                                                     if ($item->$image) {
-                                                                       $images[] = asset('image_info/' . $item->$image);
+                                                                        $images[] = asset('image_info/' . $item->$image);
                                                                     }
                                                                 }
                                                             }
-                                                        }
-                                                    @endphp
-                                                    @if (count($images) > 0)
-                                                        @foreach ($images as $image)
-                                                            <img src="{{ $image }}" alt="Image" style="max-width: 50px; max-height: 50px; margin: 5px;">
-                                                        @endforeach
-                                                    @endif
-                                                </div>
+                                                        @endphp
+                                                        @if (count($images) > 0)
+                                                            @foreach ($images as $image)
+                                                                <img src="{{ $image }}" alt="Image" style="max-width: 150px; max-height: 150px; margin: 5px;">
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
                                                 </td>
+                                                <td>
+                                                </td>                                                                                                
                                             </div>
                                         </tr>
                                     </tbody>
@@ -108,6 +109,16 @@
                 }
             }
             $('#example').DataTable();
+
+             function performSearch() {
+                var keyword = $('#searchInput').val();
+                indextable.search(keyword).draw();
+            }
+
+            // Bind the keyup event of the search input field to perform the search
+            $('#searchInput').on('keyup', function() {
+                performSearch();
+            });
             // console.log(baseid)
 
             /* $(".info-button").click(function () {

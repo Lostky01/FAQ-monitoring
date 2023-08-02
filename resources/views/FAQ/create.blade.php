@@ -145,6 +145,7 @@
                                     <input type="date" class="form-control" name="created_at"
                                         value="{{ old('created_at') }}">
                                 </div>
+                                
                                 <!-- Pilih Site options -->
                                 <div class="col-sm-5">
                                     <label for="project" class="form-label">Nama Site</label>

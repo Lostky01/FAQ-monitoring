@@ -52,6 +52,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="col-sm-5">
+                                                        DUARR 
                                                     @php
                                                         if ($item->image_url) {
                                                             $image = 'image_url';
@@ -148,7 +149,7 @@
                 imageGrid.className = "image-grid";
 
                 // Adjust the loop to show all available images (up to 4)
-                for (var i = 0; i < Math.min(4, baseImg[id].length); i++) {
+                for (var i = 0; i < Math.min(2, baseImg[id].length); i++) {
                     var imgElement = document.createElement("img");
                     imgElement.src = baseImg[id][i];
                     imgElement.className = "image-item";

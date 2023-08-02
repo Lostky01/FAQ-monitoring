@@ -162,12 +162,12 @@
                                 <!-- Pertanyaan -->
                                 <div class="col-sm-5">
                                     <label for="title" class="form-label">Pertanyaan</label>
-                                    <textarea id="mytextarea_pertanyaan" class="form-control" name="pertanyaan">{{ old('pertanyaan') }}</textarea>
+                                    <textarea id="{{-- mytextarea_pertanyaan --}}" style="height: 218px"  class="form-control" name="pertanyaan">{{ old('pertanyaan') }}</textarea>
                                 </div>
                                 <!-- Jawaban -->
                                 <div class="col-sm-5">
                                     <label for="description" class="form-label">Jawaban</label>
-                                    <textarea id="mytextarea_jawaban" class="form-control" name="jawaban">{{ old('jawaban') }}</textarea>
+                                    <textarea id="{{-- mytextarea_jawaban --}}" style="height: 218px" class="form-control" name="jawaban">{{ old('jawaban') }}</textarea>
                                 </div>
                             </div>
                             <hr>
@@ -245,10 +245,6 @@
         }
 
         function RemoveDropify(imageNum) {
-            if (currentImageNum <= 1) {
-                alert('At least one image required.');
-                return;
-            }
 
             var lastRow = $('#additional_images .row:last-child');
             lastRow.remove();
@@ -258,14 +254,15 @@
 
 
         function MoveDropify() {
-            if (currentImageNum <= 1) {
-                alert('At least one image required.');
-                return;
-            }
-
             var lastRow = $('#additional_images .row:last-child');
             lastRow.remove();
             currentImageNum--;
+
+            if (currentImageNum === 0) {
+                var firstImageRow = $('.col-sm-3:first-child');
+                firstImageRow.remove();
+                currentImageNum = 0;
+            }
         }
     </script>
 

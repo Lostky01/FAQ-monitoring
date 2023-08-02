@@ -24,6 +24,8 @@ $baseurl = 'https://monitoring.globaldeva.com/';
 
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
 
+    <link href="{{ asset('css/index_faq.css') }}" rel="stylesheet">
+
     <link rel="apple-touch-icon" sizes="57x57" href="{{ $baseurl }}/public/img/favicon3/apple-icon-57x57.png">
 
     <link rel="apple-touch-icon" sizes="60x60" href="{{ $baseurl }}/public/img/favicon3/apple-icon-60x60.png">

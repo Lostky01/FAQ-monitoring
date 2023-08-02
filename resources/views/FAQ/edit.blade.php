@@ -55,6 +55,25 @@
             margin-bottom: 30px;
         }
 
+        #additional_images {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #additional_images .image-preview {
+            flex: 0 0 150px;
+            /* Set the width of each image container (adjust as needed) */
+            margin-right: 10px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        #additional_images .delete-image-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+
         /* Restyle the form elements */
         .form-label {
             font-size: 18px;
@@ -155,6 +174,7 @@
                         </div>
                         <form action="{{ route('FAQ.update', $data->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="row mb-3">
                                 <!-- Date -->
                                 <div class="col-sm-5">
@@ -180,12 +200,12 @@
                                 <!-- Pertanyaan -->
                                 <div class="col-sm-5">
                                     <label for="title" class="form-label">Pertanyaan</label>
-                                    <textarea id="mytextarea_pertanyaan" class="form-control" name="pertanyaan">{{ $data->pertanyaan }}</textarea>
+                                    <textarea id="{{-- mytextarea_pertanyaan --}}" style="height: 218px" class="form-control" name="pertanyaan"><?php echo strip_tags($data->pertanyaan); ?></textarea>
                                 </div>
                                 <!-- Jawaban -->
                                 <div class="col-sm-5">
                                     <label for="description" class="form-label">Jawaban</label>
-                                    <textarea id="mytextarea_jawaban" class="form-control" name="jawaban">{{ $data->jawaban }}</textarea>
+                                    <textarea id="{{-- mytextarea_jawaban --}}" style="height: 218px" class="form-control" name="jawaban"><?php echo strip_tags($data->jawaban); ?></textarea>
                                 </div>
                             </div>
                             <hr>
@@ -220,20 +240,19 @@
                                     @endif
                                 </div>
                                 @php
-                                    $additionalImages = $data->image_url2;
+                                    $additionalImages = json_decode($data->image_url2, true);
                                 @endphp
-                                <!-- Additional Images -->
                                 <div class="col-sm-3" id="additional_images">
                                     @if (is_array($additionalImages) || is_object($additionalImages))
                                         @foreach ($additionalImages as $index => $imageUrl)
-                                            <div class="image-preview image{{ $index }}">
-                                                <label class="form-label">Photo {{ $index + 1 }}</label>
+                                            <div class="image-preview image{{ $index + 1 }}">
+                                                <label class="form-label">Photo {{ $index + 2 }}</label>
                                                 <button type="button" class="btn btn-danger delete-image-btn"
-                                                    data-image-index="{{ $index }}">
+                                                    data-image-index="{{ $index + 1 }}">
                                                     <i class="fa fa-close"></i>
                                                 </button>
                                                 <input type="file" class="dropify custom-dropify"
-                                                    name="image_{{ $index + 1 }}" data-max-file-size="1M"
+                                                    name="image_{{ $index + 2 }}" data-max-file-size="1M"
                                                     data-allowed-file-extensions="jpg jpeg png gif"
                                                     data-default-file="{{ asset('image_info/' . $imageUrl) }}">
                                             </div>
@@ -267,6 +286,62 @@
             selector: '#mytextarea_pertanyaan, #mytextarea_jawaban'
         });
 
+        var maxImages = 2;
+        var currentImageNum = 1;
+
+        function AddDropify() {
+            if (currentImageNum >= maxImages) {
+                alert('Maximum ' + maxImages + ' images allowed.');
+                return;
+            }
+
+
+            currentImageNum++;
+            var newImageInput = '<label for="image_' + currentImageNum + '" class="form-label">Photo ' + currentImageNum +
+                '</label>';
+            newImageInput += '<button type="button" style="margin-left: 95%" onclick="RemoveDropify(' + currentImageNum +
+                ')" class="btn btn-danger"><i class="fa fa-close"></i></button>';
+            newImageInput += '<input type="file" class="dropify custom-dropify" name="image_' + currentImageNum +
+                '" data-max-file-size="1M" data-allowed-file-extensions="jpg jpeg png gif" data-default-file="">';
+            newImageInput += '</div>';
+
+            var newRow = document.createElement('div');
+            newRow.className = 'row';
+            newRow.innerHTML = newImageInput;
+
+            document.getElementById('additional_images').appendChild(newRow);
+
+            $('.custom-dropify').last().dropify();
+            $('.image' + currentImageNum + ' .dropify').dropify();
+        }
+
+        function RemoveDropify(imageNum) {
+
+            var lastRow = $('#additional_images .row:last-child');
+            lastRow.remove();
+            currentImageNum--;
+        }
+
+
+
+        function MoveDropify() {
+            if (currentImageNum <= 1) {
+                alert('At least one image required.');
+                return;
+            }
+
+            var lastRow = $('#additional_images .row:last-child');
+            lastRow.remove();
+            currentImageNum--;
+
+
+            if (currentImageNum === 0) {
+                var firstImageRow = $('.col-sm-3:first-child');
+                firstImageRow.remove();
+                currentImageNum = 0;
+            }
+        }
+
         $(document).ready(function() {
             // Function to initialize Dropify
             function initializeDropify() {
@@ -290,46 +365,7 @@
                 removeImage(imageIndex);
             });
 
-            function AddDropify() {
-                if (currentImageNum >= maxImages) {
-                    alert('Maximum ' + maxImages + ' images allowed.');
-                    return;
-                }
 
-                currentImageNum++;
-                var newImageInput = '<label for="image_' + currentImageNum + '" class="form-label">Photo ' +
-                    currentImageNum +
-                    '</label>';
-                newImageInput += '<button type="button" style="margin-left: 95%" onclick="RemoveDropify(' +
-                    currentImageNum +
-                    ')" class="btn btn-danger"><i class="fa fa-close"></i></button>';
-                newImageInput += '<input type="file" class="dropify custom-dropify" name="image_' +
-                    currentImageNum +
-                    '" data-max-file-size="1M" data-allowed-file-extensions="jpg jpeg png gif" data-default-file="">';
-
-                // Remove this line: newImageInput += '</div>';
-
-                var newRow = document.createElement('div');
-                newRow.className = 'row';
-                newRow.innerHTML = newImageInput;
-
-                document.getElementById('additional_images').appendChild(newRow);
-
-                $('.custom-dropify').last().dropify();
-                $('.image' + currentImageNum + ' .dropify').dropify();
-            }
-
-
-            function RemoveDropify(imageNum) {
-                if (currentImageNum <= 1) {
-                    alert('At least one image required.');
-                    return;
-                }
-
-                var lastRow = $('#additional_images .row:last-child');
-                lastRow.remove();
-                currentImageNum--;
-            }
 
             function removeImage(index) {
                 var $imagePreview = $('.image' + index);
@@ -337,18 +373,6 @@
                 currentImageNum--;
             }
 
-
-
-            function MoveDropify() {
-                if (currentImageNum <= 1) {
-                    alert('At least one image required.');
-                    return;
-                }
-
-                var lastRow = $('#additional_images .row:last-child');
-                lastRow.remove();
-                currentImageNum--;
-            }
 
 
             // Function to handle the maximum number of files
@@ -379,7 +403,8 @@
                 $('.image-preview-container input[type="hidden"]').each(function() {
                     var index = $(this).data('image-index');
                     var fieldName = 'image_' + index;
-                    var hiddenInput = '<input type="hidden" name="' + fieldName + '" value="1">';
+                    var hiddenInput = '<input type="hidden" name="' + fieldName +
+                        '" value="1">';
                     $(this).after(hiddenInput);
                 });
 

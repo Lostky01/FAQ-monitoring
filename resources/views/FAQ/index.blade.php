@@ -1,5 +1,6 @@
 @extends('layouts.app-front')
 
+
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -27,9 +28,9 @@
                                 Add
                                 FAQ</a>
                         </div>
+                        
                         <div class="table-responsive">
                             <table class="table">
-                                <hr>
                                 @php
                                     $no = 1;
                                 @endphp
@@ -39,10 +40,14 @@
                                             <div class="col-sm-3">
                                                 {{-- <td class="col-sm-1">{{ $no++ }}</td> --}}
                                                 <td>
+                                                    <p><strong>{{ $no++ }}</strong></p>
+                                                </td>
+                                                <td>
+                                                    
                                                     <p><strong>Q:</strong> {!! strip_tags($item->pertanyaan) !!}</p>
                                                     <p><strong>A:</strong> {!! strip_tags($item->jawaban) !!}</p>
                                                     <div class="col-md-5" style="margin-right:40%">
-                                                        <span class="badge bg-default">{{ $item->created_at }}</span>
+                                                        <span class="badge bg-default">{{ date('M d, Y', strtotime($item->created_at)) }}</span>
                                                         <span style="color: white" class="badge bg-success">{{ strip_tags($item->id_site) }}</span>
                                                         <form action="{{ route('FAQ.delete', $item->id) }}" method="POST" style="display: inline">
                                                             @csrf
@@ -80,8 +85,8 @@
                                         </tr>
                                     </tbody>
                                 @endforeach
-                                <hr>
                             </table>
+                            <hr>
                         </div>
                     </div>
                 </div>

@@ -29,9 +29,9 @@ class FAQController extends Controller
                 $item->id_site = $getSiteName->name;
             }
 
-            $getProjectName = DB::table('projects')->where('id', $item->id_project)->first();
+            $getProjectName = DB::table('projects')->where('id', $item->name)->first();
             if ($getProjectName) {
-                $item->id_project = $getProjectName->name;
+                $item->name = $getProjectName->name;
             }
             $baseid[] = $item->id;
             if($item->image_url!='' || $item->image_url2!='') {

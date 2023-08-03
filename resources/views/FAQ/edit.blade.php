@@ -182,6 +182,17 @@
                                     <input type="date" class="form-control" name="created_at"
                                         value="{{ $data->created_at }}">
                                 </div>
+                                <div class="col-sm-5">
+                                    <label for="project" class="form-label">Pilih Client</label>
+                                    <select class="js-example-basic-single form-control" id="select-project" name="id_project">
+                                        <option value="" selected disabled>Pilih Client</option>
+                                        @foreach ($project as $key => $item)
+                                            <option value="{{ $key }}"
+                                                {{ $data->id_project == $key ? 'selected' : '' }}>
+                                                {{ $item }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <!-- Pilih Site options -->
                                 <div class="col-sm-5">
                                     <label for="project" class="form-label">Nama Site</label>

@@ -102,6 +102,7 @@ class FAQController extends Controller
 
         $request->validate([
             'id_site' => 'required',
+            'id_project' => 'required',
             'pertanyaan' => 'required',
             'jawaban' => 'required',
             'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -112,8 +113,11 @@ class FAQController extends Controller
         $FAQ = faq::findOrFail($id);
 
         $FAQ->id_site = $request->input('id_site');
+        $FAQ->id_project = $request->input('id_project');
         $FAQ->pertanyaan = $request->input('pertanyaan');
         $FAQ->jawaban = $request->input('jawaban');
+
+        
 
 
         if ($request->hasFile('image_1')) {

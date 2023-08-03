@@ -94,7 +94,7 @@
         padding: 10px;
     }
 
-    .submit-button {}
+    /* .submit-button {} */
 
     .responsive-button::before {
         display: none;

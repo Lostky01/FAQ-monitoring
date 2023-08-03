@@ -26,6 +26,8 @@ $baseurl = 'https://monitoring.globaldeva.com/';
 
     <link href="{{ asset('css/index_faq.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('css/create_faq.css') }}" rel="stylesheet">
+
     <link rel="apple-touch-icon" sizes="57x57" href="{{ $baseurl }}/public/img/favicon3/apple-icon-57x57.png">
 
     <link rel="apple-touch-icon" sizes="60x60" href="{{ $baseurl }}/public/img/favicon3/apple-icon-60x60.png">
@@ -43,6 +45,8 @@ $baseurl = 'https://monitoring.globaldeva.com/';
     <link rel="apple-touch-icon" sizes="152x152" href="{{ $baseurl }}/public/img/favicon3/apple-icon-152x152.png">
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ $baseurl }}/public/img/favicon3/apple-icon-180x180.png">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
     <link rel="icon" type="image/png" sizes="192x192"
         href="{{ $baseurl }}/public/img/favicon3/android-icon-192x192.png">
@@ -219,13 +223,14 @@ $baseurl = 'https://monitoring.globaldeva.com/';
     <!-- Add the FilePond plugins -->
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-
-
+    
+    
     <script src="{{ asset('public/js/jquery.js') }}"></script>
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+    
     <script src="{{ asset('public/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"></script>

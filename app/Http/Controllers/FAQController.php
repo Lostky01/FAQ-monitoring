@@ -3,31 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\FAQ;
+use App\Project;
 use App\Sites;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use DB;
 
+class FAQController extends Controller
+{
+    public function index()
+    {
 
-
-class FAQController extends Controller {
-
-    
-    public function index() {
-
-         $data = FAQ::
-            orderBy('faq.id_site', 'asc')
-            ->orderBy('faq.created_at', 'desc')
-            ->get();
+        $data = FAQ::orderBy('faq.id_site', 'asc')
+           ->orderBy('faq.id_project', 'asc')
+           ->orderBy('faq.created_at', 'desc')
+           ->get();
 
         $i_data = 0;
         $baseid = [];
         $images = [];
         foreach($data as $item) {
             $getSiteName = DB::table('sites')->where('id', $item->id_site)->first();
-            if($getSiteName) {
+            if ($getSiteName) {
                 $item->id_site = $getSiteName->name;
+            }
+
+            $getProjectName = DB::table('projects')->where('id', $item->id_project)->first();
+            if ($getProjectName) {
+                $item->id_project = $getProjectName->name;
             }
             $baseid[] = $item->id;
             if($item->image_url!='' || $item->image_url2!='') {
@@ -42,25 +46,28 @@ class FAQController extends Controller {
     }
 
 
-     public function create()
+    public function create()
     {
-        $sites = Sites::pluck('name', 'id'); 
+        $sites = Sites::pluck('name', 'id');
+        $project = Project::pluck('name', 'id');
 
-        return view('FAQ.create', compact('sites'));
+        return view('FAQ.create', compact('sites', 'project'));
     }
 
     public function edit($id)
     {
         $data = FAQ::findOrFail($id);
         $sites = Sites::pluck('name', 'id');
+        $project = Project::pluck('name', 'id');
 
-        return view('FAQ.edit', compact('data', 'sites'));
+        return view('FAQ.edit', compact('data', 'sites', 'project'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'id_site' => 'required',
+            'id_project' => 'required',
             'pertanyaan' => 'required',
             'jawaban' => 'required',
             'created_at' => 'required|date',
@@ -70,6 +77,7 @@ class FAQController extends Controller {
 
         $faq = new FAQ();
         $faq->id_site = $request->id_site;
+        $faq->id_project = $request->id_project;
         $faq->pertanyaan = $request->pertanyaan;
         $faq->jawaban = $request->jawaban;
         $faq->created_at = $request->created_at;
@@ -84,7 +92,6 @@ class FAQController extends Controller {
             $faq->image_url2 = $this->uploadImage($request->file('image_2'));
         }
 
-
         $faq->save();
 
         return redirect()->route('FAQ.index')->with('success', 'Information created successfully.');
@@ -92,7 +99,7 @@ class FAQController extends Controller {
 
     public function update(Request $request, $id)
     {
-        
+
         $request->validate([
             'id_site' => 'required',
             'pertanyaan' => 'required',
@@ -142,7 +149,7 @@ class FAQController extends Controller {
 
     private function uploadImage($imageFile)
     {
-        
+
         $fileName = time() . '_' . $this->generateRandomString() . '.' . $imageFile->getClientOriginalExtension();
 
         $imageFile->move(public_path('image_info'), $fileName);
@@ -160,7 +167,7 @@ class FAQController extends Controller {
         }
         return $randomString;
     }
-    
+
 
     private function deleteImage($imageUrl)
     {
@@ -196,7 +203,7 @@ class FAQController extends Controller {
 
         return response()->json(['msg' => 'berhasil', 'id' => $id, 'data' => $options]);
     }
-    
+
     public function getNameEdit(Request $request)
     {
         $id = $request->id;
@@ -210,7 +217,31 @@ class FAQController extends Controller {
         return response()->json(['msg' => 'berhasil', 'id' => $id, 'data' => $option]);
     }
 
-   
+    public function getProject(Request $request)
+    {
+        $id = $request->id;
+        $project = Project::where('name', $id)->pluck('name', 'id');
+
+        $options = '';
+        foreach ($project as $key => $item) {
+            $options .= '<option value="' . $key . '">' . $item . '</option>';
+        }
+
+        return response()->json(['msg' => 'berhasil', 'id' => $id, 'data' => $options]);
+    }
+
+    public function getProjectEdit(Request $request)
+    {
+        $id = $request->id;
+        $project= Project::where('name', $id)->get();
+
+        $option = "";
+        foreach ($project as $key => $item) {
+            $option .= '<option value="' . $item->id . '">' . $item->name . '</option>';
+        }
+
+        return response()->json(['msg' => 'berhasil', 'id' => $id, 'data' => $option]);
+    }
 
 
 }

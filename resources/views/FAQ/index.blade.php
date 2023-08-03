@@ -6,7 +6,25 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        .card-header {
+            height: 3rem;
+
+            font-size: 1rem;
+
+        }
+
+        @media (max-width: 767.98px) {
+
+            /* Gaya khusus untuk layar dengan lebar <= 767.98px (tablet dan smartphone) */
+            .card-header {
+                height: 2.5rem;
+                /* Atur tinggi card header untuk layar kecil */
+                font-size: 0.9rem;
+                /* Atur ukuran teks card header untuk layar kecil */
+            }
+        }
+    </style>
 @endsection
 
 
@@ -16,55 +34,159 @@
             <div class="row justify-content-left">
                 <div class="col-lg-12">
                     <div class="outer-box p-5 shadow-lg rounded">
-                        <div class="block-title text-left">
-                            <div class="block-title__text"><span>FAQ</span></div>
-                        </div>
-                        <div class="col-md-4" style="margin-left: 85%">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="searchInput" placeholder="Search">
-                            </div>
-                            <a href="{{ route('FAQ.create') }}" class="btn btn-success"
-                                style="width: 30%; text-align: center; height:10%; background-color: #FFB22B">+
-                                Add
-                                FAQ</a>
-                        </div>
-                        
+                        <div class="block-title__text"><span>FAQ</span></div>
                         <div class="table-responsive">
-                            <table class="table">
+                            <div class="table-responsive">
+                                <div id="dataInfo"></div>
+                                <div class="d-flex justify-content-end mb-3">
+                                    <!-- Geser kolom pencarian ke kanan -->
+                                    <div class="col-md-9 offset-md-2">
+                                        <input type="text" class="form-control" id="searchInput" placeholder="Search">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="{{ route('FAQ.create') }}" class="btn btn-success ml-3"
+                                            style="width: 80%; text-align: center; height:100%; background-color: #FFB22B">+ Add
+                                            FAQ</a>
+                                    </div>
+                                </div>
+                            <div id="dataInfo"></div>
+                            <table class="table" id="faq_data">
                                 @php
                                     $no = 1;
                                 @endphp
-                                @foreach ($data as $item)
-                                    <tbody>
+                                <tbody>
+                                    @foreach ($data as $item)
                                         <tr>
+                                            <td>
+                                                @if ($no <= 1)
+                                                    <div class="col-lg-12">
+                                                        <div class="card">
+                                                            <div class="card-header"
+                                                                style="height: 3rem; background-color:#1C7B85; color:white; font-size:1rem">
+                                                                TIPE KATEGORI CASE PAMA</div>
+                                                            <div class="card-body">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="check1" name="option1" value="something"
+                                                                        checked>
+                                                                    <label class="form-check-label">ASMI</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="check2" name="option2" value="something"
+                                                                        checked>
+                                                                    <label class="form-check-label">KPCS</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="check3" name="option3" value="something"
+                                                                        checked>
+                                                                    <label class="form-check-label">ABKL</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="check3" name="option3" value="something"
+                                                                        checked>
+                                                                    <label class="form-check-label">MTBU</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="check3" name="option3" value="something"
+                                                                        checked>
+                                                                    <label class="form-check-label">KIDE</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                @if ($no == 2)
+                                                    <div class="col-lg-12">
+                                                        <div class="card">
+                                                            <div class="card-header"
+                                                                style="height: 3rem; background-color:#1C7B85; color:white; font-size:1rem">
+                                                                TIPE KATEGORI CASE KPP</div>
+                                                            <div class="card-body">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="check1" name="option1" value="something"
+                                                                        checked>
+                                                                    <label class="form-check-label">Option 1</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="check2" name="option2" value="something"
+                                                                        checked>
+                                                                    <label class="form-check-label">Option 2</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="check3" name="option3" value="something"
+                                                                        checked>
+                                                                    <label class="form-check-label">Option 3</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                @if ($no == 3)
+                                                    <div class="col-lg-12">
+                                                        <div class="card">
+                                                            <div class="card-header"
+                                                                style="height: 3rem; background-color:#1C7B85; color:white; font-size:1rem">
+                                                                TIPE KATEGORI CASE SMART SAFETY</div>
+                                                            <div class="card-body">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="check1" name="option1" value="something"
+                                                                        checked>
+                                                                    <label class="form-check-label">Option 1</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="check2" name="option2" value="something"
+                                                                        checked>
+                                                                    <label class="form-check-label">Option 2</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </td>
                                             <div class="col-sm-3">
                                                 {{-- <td class="col-sm-1">{{ $no++ }}</td> --}}
                                                 <td>
                                                     <p><strong>{{ $no++ }}</strong></p>
                                                 </td>
                                                 <td>
-                                                    
+
                                                     <p><strong>Q:</strong> {!! strip_tags($item->pertanyaan) !!}</p>
                                                     <p><strong>A:</strong> {!! strip_tags($item->jawaban) !!}</p>
                                                     <div class="col-md-5" style="margin-right:40%">
-                                                        <span class="badge bg-default">{{ date('M d, Y', strtotime($item->created_at)) }}</span>
-                                                        <span style="color: white" class="badge bg-success">{{ strip_tags($item->id_site) }}</span>
-                                                        <form action="{{ route('FAQ.delete', $item->id) }}" method="POST" style="display: inline">
+                                                        <span
+                                                            class="badge bg-default">{{ date('M d, Y', strtotime($item->created_at)) }}</span>
+                                                        <span class="badge bg-success">{{ $item->project->name ?? 'N/A' }}</span>
+                                                        <span style="color: white"
+                                                            class="badge bg-success">{{ strip_tags($item->id_site) }}</span>
+                                                        <form action="{{ route('FAQ.delete', $item->id) }}" method="POST"
+                                                            style="display: inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger btn-sm" style="height: 20%; width: 20%">Hapus</button>
+                                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                                style="height: 20%; width: 20%">Hapus</button>
                                                         </form>
-                                                        <a class="btn btn-warning btn-sm" style="height: 20%; width: 20%; color:white; background-color:#F88B09" href="{{ route('FAQ.edit', $item->id) }}">Edit</a>
+                                                        <a class="btn btn-warning btn-sm"
+                                                            style="height: 20%; width: 20%; color:white; background-color:#F88B09"
+                                                            href="{{ route('FAQ.edit', $item->id) }}">Edit</a>
                                                         {{-- <div class="btn btn-primary id-{{ $item->id }} btn-sm" style="height: 20%; width: 40%" data-images="{{ $item->id }}">Lihat Gambar</div> --}}
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="col-sm-5 d-flex justify-content-start">
+                                                    <div class="col-sm-5 d-inline-flex justify-content-start">
                                                         @php
                                                             if ($item->image_url) {
                                                                 $image = 'image_url';
                                                                 $images = [asset('image_info/' . $item->$image)];
-                                                                for($i = 1; $i <= 2; $i++) {
+                                                                for ($i = 1; $i <= 2; $i++) {
                                                                     $image = 'image_url' . $i;
                                                                     if ($item->$image) {
                                                                         $images[] = asset('image_info/' . $item->$image);
@@ -74,17 +196,18 @@
                                                         @endphp
                                                         @if (count($images) > 0)
                                                             @foreach ($images as $image)
-                                                                <img src="{{ $image }}" alt="Image" style="max-width: 150px; max-height: 150px; margin: 5px;">
+                                                                <img src="{{ $image }}" alt="Image"
+                                                                    style="max-width: 218px; max-height: 218px; margin: 5px;">
                                                             @endforeach
                                                         @endif
                                                     </div>
                                                 </td>
                                                 <td>
-                                                </td>                                                                                                
+                                                </td>
                                             </div>
                                         </tr>
-                                    </tbody>
-                                @endforeach
+                                    @endforeach
+                                </tbody>
                             </table>
                             <hr>
                         </div>
@@ -113,9 +236,12 @@
                     $(".info-button.id-" + baseid[i]).hide();
                 }
             }
-            $('#example').DataTable();
+            /* $('#faq_data').DataTable({
 
-             function performSearch() {
+            }); */
+            new DataTable('#faq_data');
+
+            function performSearch() {
                 var keyword = $('#searchInput').val();
                 indextable.search(keyword).draw();
             }
@@ -123,6 +249,21 @@
             // Bind the keyup event of the search input field to perform the search
             $('#searchInput').on('keyup', function() {
                 performSearch();
+            });
+
+            function updateDataInfo() {
+                var info = indextable.page.info();
+                var dataInfoDiv = $('#dataInfo');
+                dataInfoDiv.html('Results ' + (info.start + 1) + '-' + (info.end + 1) + ' of ' + info.recordsTotal +
+                    ' Result');
+            }
+
+            // Call the function to update the data information initially
+            updateDataInfo();
+
+            // Bind an event to the DataTables draw event to update the data information whenever the table is redrawn
+            indextable.on('draw', function() {
+                updateDataInfo();
             });
             // console.log(baseid)
 

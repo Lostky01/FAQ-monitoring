@@ -20,7 +20,6 @@ class InfoController extends Controller
             ->orderBy('informations.date', 'desc')
             ->orderBy('projects.name', 'asc')
             ->orderBy('informations.title', 'asc')
-
             ->get();
 
         $list_site = Project::select('projects.*')   

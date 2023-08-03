@@ -1,482 +1,358 @@
-<!DOCTYPE html>
+@extends('layouts.app-front-v2_1')
 
 @section('css')
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<!-- Include your CSS libraries here -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-  .logoutbtn {
-    width: 107px;
-    height: 48px;
-    left: 1710px;
-    top: 46px;
-    background: #FB3A3A;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 12px;
+    .submit-button {
+        display: flex;
+        justify-content: center;
+    }
 
-    cursor: pointer;
-  }
+    .custom-button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 24px;
+        outline: none;
+        color: #007bff;
+    }
+
+    .custom-button:hover {
+        color: #ff0000;
+    }
+
+    .form-container {
+        background-color: #f5f5f5;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+
+    .form-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    /* Restyle the form elements */
+    .form-label {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        font-size: 16px;
+        transition: box-shadow 0.2s;
+    }
+
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 5px #007bff;
+    }
+
+    .custom-button {
+        border: 1px solid #007bff;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        font-size: 24px;
+        padding: 8px 16px;
+        border-radius: 5px;
+        transition: background-color 0.2s;
+    }
+
+    .custom-button:hover {
+        background-color: #0056b3;
+    }
+
+    .submit-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        content: "+ Add to List";
+    }
+
+    .image-input-container {
+        margin-bottom: 20px;
+    }
+
+    .image-input-container .form-label {
+        display: block;
+    }
+
+    .image-input-container .form-control {
+        display: block;
+        margin-top: 10px;
+    }
+
+    /* For mobile phones and tablets: */
+    @media (max-width: 991.98px) {
+        .form-container {
+            padding: 10px;
+        }
+
+        .submit-button {}
+
+        .responsive-button::before {
+            display: none;
+        }
+
+
+        .submit-button.responsive-button::before {
+            content: "+";
+
+        }
+    }
+
+    .outer-box {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .form-label {
+        text-align: left;
+    }
+
+    .custom-dropify {
+        width: 100%;
+        height: 100%;
+    }
 </style>
+@endsection
 
-<html lang="en">
+@section('content')
+<section class="service-one my-5">
+    <div class="container-fluid">
+        <div class="row justify-content-left">
+            <div class="col-lg-12">
+                <div class="outer-box p-5 shadow-lg rounded">
+                    <div class="block-title text-left">
+                        <div class="block-title__text"><span>Input FAQ</span></div>
+                    </div>
+                    <form action="{{ route('FAQ.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row mb-3">
+                            <!-- Date -->
+                            <div class="col-sm-5">
+                                <label for="date" class="form-label">Date</label>
+                                <input type="date" class="form-control" name="created_at" value="{{ old('created_at') }}">
+                            </div>
 
-<head>
+                            <!-- Pilih Site options -->
+                            <div class="col-sm-5">
+                                <label for="project" class="form-label">Nama Site</label>
+                                <select class="js-example-basic-single form-control" id="select-project" name="id_site">
+                                    <option value="" selected disabled>Pilih Site</option>
+                                    @foreach ($sites as $key => $item)
+                                    <option value="{{ $key }}" {{ old('id_site') == $key ? 'selected' : '' }}>
+                                        {{ $item }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <!-- Pertanyaan -->
+                            <div class="col-sm-5">
+                                <label for="title" class="form-label">Pertanyaan</label>
+                                <textarea id="{{-- mytextarea_pertanyaan --}}" style="height: 218px" class="form-control" name="pertanyaan">{{ old('pertanyaan') }}</textarea>
+                            </div>
+                            <!-- Jawaban -->
+                            <div class="col-sm-5">
+                                <label for="description" class="form-label">Jawaban</label>
+                                <textarea id="{{-- mytextarea_jawaban --}}" style="height: 218px" class="form-control" name="jawaban">{{ old('jawaban') }}</textarea>
+                            </div>
+                        </div>
+                        <hr>
+                        <button type="button" id="PlusImage" onclick="AddDropify()" class="btn btn-primary">
+                            + Tambah Gambar
+                        </button>
 
-  <meta charset="UTF-8">
+                        <div class="row mb-3">
+                            <!-- Image 1 -->
+                            <div class="col-sm-3">
+                                <label for="image_1" class="form-label">Photo 1</label>
+                                <button type="button" style="margin-left: 95%" id="MoveImage" onclick="MoveDropify()" class="btn btn-danger">
+                                    <i class="fa fa-close"></i>
+                                </button>
+                                <input type="file" class="dropify" name="image_1" data-max-file-size="1M" data-allowed-file-extensions="jpg jpeg png gif" image_list="1" data-default-file="">
+                            </div>
+                            <!-- Additional Images -->
+                            <div class="col-sm-3" id="additional_images">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center">
 
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <title>REPORT ITSA</title>
-
-  <link rel="apple-touch-icon" sizes="57x57" href="{{asset('public/img/favicon3/apple-icon-57x57.png')}}">
-
-  <link rel="apple-touch-icon" sizes="60x60" href="{{asset('public/img/favicon3/apple-icon-60x60.png')}}">
-
-  <link rel="apple-touch-icon" sizes="72x72" href="{{asset('public/img/favicon3/apple-icon-72x72.png')}}">
-
-  <link rel="apple-touch-icon" sizes="76x76" href="{{asset('public/img/favicon3/apple-icon-76x76.png')}}">
-
-  <link rel="apple-touch-icon" sizes="114x114" href="{{asset('public/img/favicon3/apple-icon-114x114.png')}}">
-
-  <link rel="apple-touch-icon" sizes="120x120" href="{{asset('public/img/favicon3/apple-icon-120x120.png')}}">
-
-  <link rel="apple-touch-icon" sizes="144x144" href="{{asset('public/img/favicon3/apple-icon-144x144.png')}}">
-
-  <link rel="apple-touch-icon" sizes="152x152" href="{{asset('public/img/favicon3/apple-icon-152x152.png')}}">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="{{asset('public/img/favicon3/apple-icon-180x180.png')}}">
-
-  <link rel="icon" type="image/png" sizes="192x192" href="{{asset('public/img/favicon3/android-icon-192x192.png')}}">
-
-  <link rel="icon" type="image/png" sizes="32x32" href="{{asset('public/img/favicon3/favicon-32x32.png')}}">
-
-  <link rel="icon" type="image/png" sizes="96x96" href="{{asset('public/img/favicon3/favicon-96x96.png')}}">
-
-  <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/img/favicon3/favicon-16x16.png')}}">
-
-  <link rel="manifest" href="{{asset('public/img/favicon3/manifest.json')}}">
-
-  <meta name="msapplication-TileColor" content="#ffffff">
-
-  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-
-  <meta name="theme-color" content="#ffffff">
-
-
-  <!---------------------------- FOR USE CSS ---------------------------->
-  <!-- Add this in the <head> section of your HTML -->
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-  <link rel="stylesheet" type="text/css" href="{{ asset('public/css/style_timelane.css?v2?>')}}">
-
-  <link rel="stylesheet" href="{{asset('public/css/style.css?v=1.0')}}">
-
-  <link rel="stylesheet" href="{{asset('public/css/responsive.css')}}">
-
-  <link rel="stylesheet" href="{{asset('public/css/dropify.min.css')}}">
-
-  {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"> --}}
-
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css"> -->
-
-  @yield('css')
-
-  <style>
-    body {
-      background: #F0F0F0 !important;
-    }
-
-    a.ex3:hover,
-    a.ex3:active {
-      /* background: black; */
-    }
-
-    .desktop-show {
-      display: block !important;
-    }
-
-    .mobile-show {
-      display: none !important;
-    }
-
-    .header-menu-c {
-      color: #464A53;
-    }
-
-    .width-offset-desk {
-      width: 102% !important;
-    }
-
-    .height-nav-desk {
-      height: 15vh;
-    }
-
-    .bg-1D7B85 {
-      background: #1D7B85;
-    }
-
-    .nav-box-sh {
-      box-shadow: 0px 3px 10px 0px #abab;
-    }
-
-    .site-footer__bottom-footer p a {
-      color: #898989 !important;
-      /* -webkit-transition: all .4s ease;
-      transition: all .4s ease; */
-    }
-
-    .site-footer__bottom-footer {
-      /* background-color: #FAFAFA; */
-      padding: 25px 0 !important;
-    }
-
-    @media screen and (min-width: 499px) and (max-width: 1000px) {
-      .desktop-show {
-        display: none !important;
-      }
-
-      .mobile-show {
-        display: block !important;
-      }
-    }
-
-    @media screen and (max-width: 489px) {
-      .desktop-show {
-        display: none !important;
-      }
-
-      .mobile-show {
-        display: block !important;
-      }
-    }
-  </style>
-
-</head>
-
-@php
-$role = Auth::user()->role;
-@endphp
-
-<body>
-
-  <div class="preloader" style="display: none;"></div><!-- /.preloader -->
-  <div class="page-wrapper">
-
-    <!--------- Desktop header --------->
-    <header class="site-header header-one desktop-show" style="background-color: #fff;">
-      <nav class="navbar navbar-expand-lg navbar-light header-navigation stricky slideIn animated width-offset-desk nav-box-sh" style="background-color: #fff;">
-        <div class="row clearfix w-100 ">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="col-2 col-lg-2 col-xl-2 logo-box clearfix d-flex justify-content-center align-items-center bg-1D7B85">
-            <img src="{{ asset('public/img/aset/monitoring-globaldeva-goodeva-logo.png') }}" style="width: 75%; height: auto;" class="main-logo" alt="Awesome Image">
-          </div><!-- /.logo-box -->
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="col-8 col-lg-8 col-xl-8 main-navigation">
-            <ul class=" navigation-box one-page-scroll-menu ">
-              <li class="scrollToLink">
-                <a class="ex3 header-menu-c" href="{{ url('home') }}">
-                  Materi
-                  <button class="sub-nav-toggler">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                </a>
-                <ul class="sub-menu">
-                  <li><a href="{{ url('library') }}">Library</a></li>
-                </ul>
-                <!-- /.sub-menu -->
-              </li>
-              <!-- <li class="scrollToLink current">
-                <a class="ex3 header-menu-c" href="{{ url('home') }}">Materi</a>
-              </li> -->
-              <li class="scrollToLink">
-                <a class="ex3 header-menu-c" href="{{ url('project') }}">Project</a>
-              </li>
-              <li class="scrollToLink">
-                <a class="ex3 header-menu-c" href="{{ url('domain') }}">Domain</a>
-
-              </li>
-              <li class="scrollToLink">
-                <a class="ex3 header-menu-c" href="{{ url('FAQ') }}">FaQ</a>
-
-              </li>
-              <li class="scrollToLink">
-                <a class="ex3 header-menu-c" href="#blog">Leader Board<button class="sub-nav-toggler"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button></a>
-                <ul class="sub-menu">
-                  <li><a href="{{ url('/leaderboard-response') }}">Response</a></li>
-                  <li><a href="{{ url('/leaderboard-performance')}}">Performance</a></li>
-                </ul><!-- /.sub-menu -->
-                {{-- <a class="ex3 header-menu-c" href="{{ url('/leaderboard') }}">Leader Board</a> --}}
-              </li>
-
-              <li class="scrollTolink">
-                @if($role == "1")
-                <a class="ex3 header-menu-c" href="{{ url('cases') }}">Case</a>
-                @endif
-
-                @if($role == "2")
-                <a class="ex3 header-menu-c" href="#blog">Report<button class="sub-nav-toggler"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> <span class="icon-bar"></span></button></a>
-                <ul class="sub-menu">
-                  <li><a href="{{url('status-cases')}}">Daily Case</a></li>
-                  <li><a href="{{url('cms-pertanyaan')}}">Question Monitoring</a></li>
-                  <li><a href="{{url('cms-pertanyaan-case')}}">Kategori Case</a></li>
-                </ul>
-                @endif
-
-                @if($role == "3")
-                <a class="ex3 header-menu-c" href="#blog">KPI<button class="sub-nav-toggler"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span> <span class="icon-bar"></span></button></a>
-                {{-- <a class="ex3 header-menu-c" href="{{url('status-cases')}}">Case</a> --}}
-                <ul class="sub-menu">
-                  <li><a href="{{url('status-cases')}}">Case</a></li>
-                  <li><a href="{{url('penalty')}}">Penalty</a></li>
-                  <li><a href="{{url('cms-pertanyaan')}}">Question Monitoring</a></li>
-                  <li><a href="{{url('cms-pertanyaan-case')}}">Kategori Case</a></li>
-                </ul>
-                @endif
-              </li>
-
-              <li class="scrollToLink">
-                <a class="ex3 header-menu-c" href="#blog">Monitoring<button class="sub-nav-toggler"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button></a>
-                <ul class="sub-menu">
-                  @if($role == "2")
-                  <li><a href="{{ url('absen-monitoring') }}">Absen Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring') }}">Reporting Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring-v2-dev') }}">Reporting Monitoring V2</a></li>
-                  <li><a href="{{ url('jadwal-monitoring') }}">Jadwal Monitoring</a></li>
-                  @endif
-
-                  @if($role == "1")
-                  <li><a href="{{ url('absen-monitoring') }}">Absen Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring') }}">Reporting Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring-v2-dev') }}">Reporting Monitoring V2</a></li>
-                  <li><a href="{{ url('sisa-ram') }}">Absen Ram 30 Menit</a></li>
-                  <li><a href="{{ url('jadwal-monitoring') }}">Jadwal Monitoring</a></li>
-                  @endif
-
-                  @if($role == "3")
-                  <li><a href="{{ url('absen-monitoring') }}">Absen Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring') }}">Reporting Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring-v2-dev') }}">Reporting Monitoring V2</a></li>
-                  <li><a href="{{ url('sisa-ram') }}">Absen Ram 30 Menit</a></li>
-                  <li><a href="{{ url('jadwal-monitoring') }}">Jadwal Monitoring</a></li>
-                  @endif
-                </ul><!-- /.sub-menu -->
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-          <div class="col-2 col-lg-2 col-xl-2 d-flex justify-content-center align-items-center right-side-box warna-logout">
-            <form action="/logout" method="post">
-              @csrf
-              <button type="submit" class="logoutbtn text-white"><img style="width: 25px; height:20px; margin-right: 15px;" src="{{ asset('public/img/logo/logo-logout.png') }}" alt="Awesome Image">Log Out</button>
-            </form>
-          </div><!-- /.right-side-box -->
+                            </div>
+                        </div>
+                        <div class="submit-button text-right responsive-button">
+                            <button type="submit" class="btn btn-primary" style="margin-left: 90%; background-color: #FFB22B">+ Add FAQ To List</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <!-- /.container -->
-      </nav>
-    </header><!-- /.header-one -->
+    </div>
+</section>
+@endsection
+@section('js_after')
+<script src="https://cdn.tiny.cloud/1/iaklx4npf5s3iruz98j0rjkzc7j45t421qjfu97jd0fmmzvs/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#mytextarea_pertanyaan, #mytextarea_jawaban'
+    });
+
+    var maxImages = 2;
+    var currentImageNum = 1;
+
+    function AddDropify() {
+        if (currentImageNum >= maxImages) {
+            alert('Maximum ' + maxImages + ' images allowed.');
+            return;
+        }
 
 
-    <!--------- Mobile header --------->
-    <header class="site-header header-one mobile-show" style="background-color: #66BFBF;">
-      <nav class="navbar navbar-expand-lg navbar-light header-navigation stricky slideIn animated" style="background-color: #252525">
-        <div class="container-fluid clearfix">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="logo-box clearfix">
-            <img src="{{ asset('public/img/aset/monitoring-globaldeva-goodeva-logo.png') }}" style="width: 48px; height: 70px; margin-left: 25%" class="main-logo" alt="Awesome Image">
-            <button class="menu-toggler" data-target=".header-one .main-navigation" style="margin-right: 0%;">
-              <span class="fa fa-bars"></span>
-            </button>
-          </div><!-- /.logo-box -->
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="main-navigation">
-            <ul class=" navigation-box one-page-scroll-menu ">
-              <li class="scrollToLink">
-                <a class="ex3" href="{{ url('home') }}" style="color: #464A53;">
-                  Materi
-                  <button class="sub-nav-toggler">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                </a>
-                <ul class="sub-menu">
-                  <li><a href="{{ url('library') }}">Library</a></li>
-                </ul>
-                <!-- /.sub-menu -->
-              </li>
-              <!-- <li class="scrollToLink current">
-                <a class="ex3" href="{{ url('home') }}" style="color: #464A53;">Materi</a>
-              </li> -->
-              <li class="scrollToLink">
-                <a class="ex3" href="{{ url('project') }}" style="color: #464A53;">Project</a>
-              </li>
-              <li class="scrollToLink">
-                <a class="ex3" href="{{ url('domain') }}" style="color: #464A53;">Domain</a>
+        currentImageNum++;
+        var newImageInput = '<label for="image_' + currentImageNum + '" class="form-label">Photo ' + currentImageNum +
+            '</label>';
+        newImageInput += '<button type="button" style="margin-left: 95%" onclick="RemoveDropify(' + currentImageNum +
+            ')" class="btn btn-danger"><i class="fa fa-close"></i></button>';
+        newImageInput += '<input type="file" class="dropify custom-dropify" name="image_' + currentImageNum +
+            '" data-max-file-size="1M" data-allowed-file-extensions="jpg jpeg png gif" data-default-file="">';
+        newImageInput += '</div>';
 
-              </li>
-              <li class="scrollToLink">
-                <a class="ex3" href="{{ url('FAQ') }}" style="color: #464A53;">FaQ</a>
+        var newRow = document.createElement('div');
+        newRow.className = 'row';
+        newRow.innerHTML = newImageInput;
 
-              </li>
-              <li class="scrollToLink">
-                <a class="ex3" href="#blog" style="color: #464A53;">Leader Board<button class="sub-nav-toggler"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button></a>
-                <ul class="sub-menu">
-                  <li><a href="{{ url('/leaderboard-response') }}">Response</a></li>
-                  <li><a href="{{ url('/leaderboard-performance')}}">Performance</a></li>
-                </ul><!-- /.sub-menu -->
-                {{-- <a class="ex3" href="{{ url('/leaderboard') }}" style="color: white;">Leader Board</a> --}}
-              </li>
+        document.getElementById('additional_images').appendChild(newRow);
 
-              <li class="scrollTolink">
-                @if($role == "1")
-                <a class="ex3" href="{{ url('cases') }}" style="color: white;">Case</a>
-                @endif
+        $('.custom-dropify').last().dropify();
+        $('.image' + currentImageNum + ' .dropify').dropify();
+    }
 
-                @if($role == "2")
-                <a class="ex3" href="#blog" style="color: white;">Report<button class="sub-nav-toggler"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> <span class="icon-bar"></span></button></a>
-                <ul class="sub-menu">
-                  <li><a href="{{url('status-cases')}}">Daily Case</a></li>
-                  <li><a href="{{url('cms-pertanyaan')}}">Question Monitoring</a></li>
-                  <li><a href="{{url('cms-pertanyaan-case')}}">Kategori Case</a></li>
-                </ul>
-                @endif
+    function RemoveDropify(imageNum) {
 
-                @if($role == "3")
-                <a class="ex3" href="#blog" style="color: white;">KPI<button class="sub-nav-toggler"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span> <span class="icon-bar"></span></button></a>
-                {{-- <a class="ex3" href="{{url('status-cases')}}" style="color: white;">Case</a> --}}
-                <ul class="sub-menu">
-                  <li><a href="{{url('status-cases')}}">Case</a></li>
-                  <li><a href="{{url('penalty')}}">Penalty</a></li>
-                  <li><a href="{{url('cms-pertanyaan')}}">Question Monitoring</a></li>
-                  <li><a href="{{url('cms-pertanyaan-case')}}">Kategori Case</a></li>
-                </ul>
-                @endif
-              </li>
-
-              <li class="scrollToLink">
-                <a class="ex3" href="#blog" style="color: white;">Monitoring<button class="sub-nav-toggler"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button></a>
-                <ul class="sub-menu">
-                  @if($role == "2")
-                  <li><a href="{{ url('absen-monitoring') }}">Absen Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring') }}">Reporting Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring-v2-dev') }}">Reporting Monitoring V2</a></li>
-                  <li><a href="{{ url('jadwal-monitoring') }}">Jadwal Monitoring</a></li>
-                  @endif
-
-                  @if($role == "1")
-                  <li><a href="{{ url('absen-monitoring') }}">Absen Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring') }}">Reporting Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring-v2-dev') }}">Reporting Monitoring V2</a></li>
-                  <li><a href="{{ url('sisa-ram') }}">Absen Ram 30 Menit</a></li>
-                  <li><a href="{{ url('jadwal-monitoring') }}">Jadwal Monitoring</a></li>
-                  @endif
-
-                  @if($role == "3")
-                  <li><a href="{{ url('absen-monitoring') }}">Absen Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring') }}">Reporting Monitoring</a></li>
-                  <li><a href="{{ url('reporting-monitoring-v2-dev') }}">Reporting Monitoring V2</a></li>
-                  <li><a href="{{ url('sisa-ram') }}">Absen Ram 30 Menit</a></li>
-                  <li><a href="{{ url('jadwal-monitoring') }}">Jadwal Monitoring</a></li>
-                  @endif
-                </ul><!-- /.sub-menu -->
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-          <div class="right-side-box warna-logout">
-            <form action="/logout" method="post">
-              @csrf
-              <button type="submit" class="logoutbtn text-white"><img style="width: 25px; height:20px; margin-right: 15px;" src="{{ asset('public/img/logo/logo-logout.png') }}" alt="Awesome Image">Log Out</button>
-            </form>
-          </div><!-- /.right-side-box -->
-        </div>
-        <!-- /.container -->
-      </nav>
-    </header><!-- /.header-one -->
-
-
-    @yield('content')
-
-    <!--------- Footer --------->
-    <footer class="site-footer mt-5">
-
-      <!-- <img src="{{asset('public/img/banner-icon-1-1.png')}}" alt="Awesome Image" class="bubble-1" /> -->
-      <!-- <img src="{{asset('public/img/banner-icon-1-3.png')}}" alt="Awesome Image" class="bubble-2" /> -->
-      <!-- <img src="{{asset('public/img/banner-icon-1-2.png')}}" alt="Awesome Image" class="bubble-3" /> -->
-      <!-- <img src="{{asset('public/img/banner-icon-1-4.png')}}" alt="Awesome Image" class="bubble-4" /> -->
-
-      <div class="site-footer__bottom-footer text-center">
-
-        <div class="container">
-
-          <p> {{ date('Y') }} copyright &copy; <a href="#">Tim Teknis Monitoring ></a></p>
-
-        </div><!-- /.container -->
-
-      </div><!-- /.site-footer__bottom-footer -->
-
-    </footer><!-- /.site-footer -->
-    <!--------- Footer --------->
-
-  </div><!-- /.page-wrapper -->
-  <a href="#" data-target="html" class="scroll-to-target scroll-to-top" style="display: none;"><i class="fa fa-angle-up"></i></a>
-  <!-- /.scroll-to-top -->
-
-  <script src="{{asset('public/js/jquery.js')}}"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-  <script src="{{asset('public/js/bootstrap.bundle.min.js')}}"></script>
-
-  {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script> --}}
-
-  <script src="{{asset('public/js/owl.carousel.min.js')}}"></script>
-
-  <script src="{{asset('public/js/waypoints.min.js')}}"></script>
-
-  <script src="{{asset('public/js/jquery.counterup.min.js')}}"></script>
-
-  <script src="{{asset('public/js/jquery.bxslider.min.js')}}"></script>
-
-  <script src="{{asset('public/js/jquery.easing.min.js')}}"></script>
-
-  <script src="{{asset('public/js/theme.js')}}"></script>
-
-  <script src="{{asset('public/js/dropify.min.js')}}"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-  <script src="{{asset('public/js/fslightbox.js')}}"></script>
-
-  @yield('js_after')
+        var lastRow = $('#additional_images .row:last-child');
+        lastRow.remove();
+        currentImageNum--;
+    }
 
 
 
-  <script>
+    function MoveDropify() {
+        var lastRow = $('#additional_images .row:last-child');
+        lastRow.remove();
+        currentImageNum--;
+
+        if (currentImageNum === 0) {
+            var firstImageRow = $('.col-sm-3:first-child');
+            firstImageRow.remove();
+            currentImageNum = 0;
+        }
+    }
+</script>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $(document).ready(function() {
 
-      $('.js-example-basic-single').select2({
+        $('.dropify').dropify();
+        $('.custom-dropify').last().dropify({
+            messages: {
+                default: 'Upload',
+                replace: 'Replace Image',
+                remove: 'Remove',
+                error: 'Error: File upload failed.'
+            }
+        });
 
-        //theme:"bootstrap4"
+        $('.dropify').on('dropify.fileReady', function(event, file) {
+            var $input = $(this);
+            var maxFiles = parseInt($input.attr('data-max-files'), 2);
+            var maxSize = parseInt($input.attr('data-max-file-size'), 10) * 1024; // Convert to bytes
+            var files = $input.dropify('getFilesCount');
 
-      });
+            if (files > maxFiles) {
+                $input.dropify('resetPreview');
+                $input.val('');
+                alert('You can upload a maximum of ' + maxFiles + ' files.');
+            } else if (file.size > maxSize) {
+                $input.dropify('resetPreview');
+                $input.val('');
+                alert('File size should not exceed ' + $input.attr('data-max-file-size') + '.');
+            }
+        });
 
+        $('.dropify').on('dropify.errors', function(event, element) {
+            var validExtensions = $(this).attr('data-allowed-file-extensions');
+            var fileName = element.name;
+            var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1).toLowerCase();
+
+            if (validExtensions.indexOf(fileNameExt) == -1) {
+                alert('File type must be ' + validExtensions + '.');
+                $(this).dropify('resetPreview');
+                $(this).val('');
+            }
+        });
     });
-  </script>
-</body>
 
 
+    //// jquery show site by select client 
+    $("#select-client").on('change', function() {
+        var id = this.value;
+        // console.log(id);
+        $.ajax({
+            method: 'get',
+            url: "{{ url('get-site-by') }}/" + id, // Pass the id parameter
+            success: function(result) {
+                if (result.msg == 'berhasil') {
+                    let datas = result.datas;
 
-</html>
+                    // console.log(datas);
+                    $('#select-project').find('option').remove().end();
+
+                    if (datas.length == 0) {
+                        $('#select-project').append('<option value="">Not Found</option>');
+                    } else {
+
+                        $('#select-project').append('<option value="">Pilih Site</option>');
+
+                        for (let i = 0; i < datas.length; i++) {
+                            // const element = array[index];
+                            $('#select-project').append('<option value="' + datas[i]['id'] + '">' + datas[i]['name'] + '</option>');
+                        }
+                    }
+                } else {
+                    $('#select-project').find('option').remove().end();
+                    $('#select-project').append('<option value="">Not Found</option>');
+                    $('#select-project').trigger('change');
+                    $('#select-project').select2({
+                        theme: "bootstrap",
+                        width: "100%"
+                    });
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(xhr.responseText);
+                alert(xhr.responseText);
+            }
+        });
+    });
+</script>
+@endsection

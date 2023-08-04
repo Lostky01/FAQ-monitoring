@@ -15,9 +15,7 @@ class FAQController extends Controller
     public function index()
     {
 
-        $data = FAQ::orderBy('faq.id_site', 'asc')
-           ->orderBy('faq.id_project', 'asc')
-           ->orderBy('faq.created_at', 'desc')
+        $data = FAQ::orderBy('faq.created_at', 'desc')
            ->get();
 
         $i_data = 0;
@@ -54,14 +52,6 @@ class FAQController extends Controller
         return view('FAQ.create', compact('sites', 'project'));
     }
 
-    public function edit($id)
-    {
-        $data = FAQ::findOrFail($id);
-        $sites = Sites::pluck('name', 'id');
-        $project = Project::pluck('name', 'id');
-
-        return view('FAQ.edit', compact('data', 'sites', 'project'));
-    }
 
     public function store(Request $request)
     {
@@ -96,10 +86,17 @@ class FAQController extends Controller
 
         return redirect()->route('FAQ.index')->with('success', 'Information created successfully.');
     }
+    public function edit($id)
+    {
+        $data = FAQ::findOrFail($id);
+        $sites = Sites::pluck('name', 'id');
+        $project = Project::pluck('name', 'id');
+
+        return view('FAQ.edit', compact('data', 'sites', 'project'));
+    }
 
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'id_site' => 'required',
             'id_project' => 'required',
@@ -109,44 +106,42 @@ class FAQController extends Controller
             'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        /* dd($request->all()); */
-        $FAQ = faq::findOrFail($id);
+        // dd($request->all());
 
-        $FAQ->id_site = $request->input('id_site');
-        $FAQ->id_project = $request->input('id_project');
-        $FAQ->pertanyaan = $request->input('pertanyaan');
-        $FAQ->jawaban = $request->input('jawaban');
+        $faq = FAQ::findOrFail($id);
 
-        
-
-
+        $faq->id_site = $request->input('id_site');
+        $faq->id_project = $request->input('id_project');
+        $faq->pertanyaan = $request->input('pertanyaan');
+        $faq->jawaban = $request->input('jawaban');
+        $faq->created_at = $request->input('created_at');
+        // dd($request->input('delete_image_2'));
         if ($request->hasFile('image_1')) {
-            if ($FAQ->image_url) {
-                $this->deleteImage($FAQ->image_url);
+            if ($faq->image_url) {
+                $this->deleteImage($faq->image_url);
             }
-            $FAQ->image_url = $this->uploadImage($request->file('image_1'));
-        } elseif ($request->input('delete_image_1')) {
-            if ($FAQ->image_url) {
-                $this->deleteImage($FAQ->image_url);
-                $FAQ->image_url = null;
+            $faq->image_url = $this->uploadImage($request->file('image_1'));
+        } elseif ($request->input('delete_image_2') == '0') {
+            if ($faq->image_url) {
+                $this->deleteImage($faq->image_url);
+                $faq->image_url = null;
             }
         }
-
-
+        
         if ($request->hasFile('image_2')) {
-            if ($FAQ->image_url2) {
-                $this->deleteImage($FAQ->image_url2);
+            if ($faq->image_url2) {
+                $this->deleteImage($faq->image_url2);
             }
-            $FAQ->image_url2 = $this->uploadImage($request->file('image_2'));
-        } elseif ($request->input('delete_image_2')) {
-            if ($FAQ->image_url2) {
-                $this->deleteImage($FAQ->image_url2);
-                $FAQ->image_url2 = null;
+            $faq->image_url2 = $this->uploadImage($request->file('image_2'));
+        } elseif ($request->input('delete_image_2') == '0') {
+            if ($faq->image_url2) {
+                $this->deleteImage($faq->image_url2);
+                $faq->image_url2 = null;
             }
         }
 
 
-        $FAQ->save();
+        $faq->save();
 
         return redirect()->route('FAQ.index')->with('success', 'Information updated successfully.');
     }
@@ -161,6 +156,15 @@ class FAQController extends Controller
         return $fileName;
     }
 
+    private function deleteImage($imageUrl)
+    {
+        if (!empty($imageUrl)) {
+            $imagePath = public_path('image_info/' . $imageUrl);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+    }
     public function generateRandomString($length = 10)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -173,21 +177,10 @@ class FAQController extends Controller
     }
 
 
-    private function deleteImage($imageUrl)
-    {
-        if (!empty($imageUrl)) {
-            $imagePath = public_path('image_info/' . $imageUrl);
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
-        }
-    }
 
     public function destroy($id)
     {
-        /* dd('boom'); */
         $data = FAQ::findOrFail($id);
-        /* dd($data); */
         $this->deleteImage($data->image_url);
         $this->deleteImage($data->image_url2);
         $data->delete();

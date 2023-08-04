@@ -26,3 +26,4 @@ Route::post('/FAQ', [FAQController::class, 'store'])->name('FAQ.store');
 Route::get('/FAQ/edit/{id}', [FAQController::class, 'edit'])->name('FAQ.edit');
 Route::put('/FAQ/update/{id}', [FAQController::class, 'update'])->name('FAQ.update');
 Route::delete('/FAQ/delete/{id}', [FAQController::class, 'destroy'])->name('FAQ.delete');
+Route::delete('/delete-image/{imageNum}', 'FAQController@deleteImage')->name('delete.image');

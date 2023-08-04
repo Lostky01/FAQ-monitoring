@@ -5,166 +5,51 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
-        .image-preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .image-preview {
-            position: relative;
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-
-        .delete-image-btn {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-        }
-
-        .submit-button {
-            display: flex;
-            justify-content: center;
-        }
-
-        .custom-button {
-            border: none;
-            background-color: transparent;
-            cursor: pointer;
-            font-size: 24px;
-            outline: none;
-            color: #007bff;
-        }
-
-        .custom-button:hover {
-            color: #ff0000;
-        }
-
-        .form-container {
-            background-color: #f5f5f5;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-        }
-
-        .form-title {
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
-
-        #additional_images {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        #additional_images .image-preview {
-            flex: 0 0 150px;
-            /* Set the width of each image container (adjust as needed) */
-            margin-right: 10px;
-            margin-bottom: 10px;
-            position: relative;
-        }
-
-        #additional_images .delete-image-btn {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-        }
-
-        /* Restyle the form elements */
-        .form-label {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .form-control {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            font-size: 16px;
-            transition: box-shadow 0.2s;
-        }
-
-        .form-control:focus {
-            outline: none;
-            box-shadow: 0 0 5px #007bff;
-        }
-
-        .custom-button {
-            border: 1px solid #007bff;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-            font-size: 24px;
-            padding: 8px 16px;
-            border-radius: 5px;
-            transition: background-color 0.2s;
-        }
-
-        .custom-button:hover {
-            background-color: #0056b3;
-        }
-
-        .submit-button {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            content: "+ Add to List";
-        }
-
-
-        .image-input-container {
-            margin-bottom: 20px;
-        }
-
-
-
-        .image-input-container .form-label {
+        .desktop-show {
             display: block;
         }
 
-        .image-input-container .form-control {
-            display: block;
-            margin-top: 10px;
+        .mobile-show {
+            display: none;
         }
 
-        /* For mobile phones and tablets: */
-        @media (max-width: 991.98px) {
-            .form-container {
-                padding: 10px;
-            }
-
-            .submit-button {}
-
-            .responsive-button::before {
+        @media screen and (max-width: 450px) {
+            .desktop-show {
                 display: none;
             }
 
-
-            .submit-button.responsive-button::before {
-                content: "+";
-
+            .mobile-show {
+                display: block;
             }
         }
 
-        .outer-box {
-            width: 95%;
-            margin: 0 auto;
+        /* @media screen and (min-width: 350px) {
+
+                        .desktop-show {
+                            display: none;
+                        }
+
+                        .mobile-show {
+                            display: block;
+                        }
+
+                    } */
+
+
+        #tomboladd-mobile {
+            display: none;
         }
 
-        .form-label {
-            text-align: left;
+        button.plus {
+            display: none;
         }
     </style>
 @endsection
 
 @section('content')
-    <section class="service-one my-5">
+    <section class="service-one my-5 desktop-show">
         <div class="container-fluid">
             <div class="row justify-content-left">
                 <div class="col-lg-12">
@@ -184,7 +69,8 @@
                                 </div>
                                 <div class="col-sm-5">
                                     <label for="project" class="form-label">Pilih Client</label>
-                                    <select class="js-example-basic-single form-control" id="select-project" name="id_project">
+                                    <select class="js-example-basic-single form-control" id="select-project"
+                                        name="id_project">
                                         <option value="" selected disabled>Pilih Client</option>
                                         @foreach ($project as $key => $item)
                                             <option value="{{ $key }}"
@@ -220,20 +106,21 @@
                                 </div>
                             </div>
                             <hr>
-                            <button type="button" id="PlusImage" onclick="AddDropify()" class="btn btn-primary">
+                            <button type="button" id="PlusImage" onclick="AddDropify('desktop')" class="btn btn-primary"
+                                res="desktop">
                                 + Tambah Gambar
                             </button>
 
-                            <div class="row mb-3">
+                            <div class="row mb-3" id="list_image_desktop">
                                 <!-- Image 1 -->
-                                <div class="col-sm-3">
+                                <div class="col-sm-3" id="additional_images1_desktop">
                                     @php
                                         $imageUrl1 = $data->image_url ?? null;
                                     @endphp
                                     @if ($imageUrl1)
                                         <label for="image_1" class="form-label">Photo 1</label>
                                         <button type="button" style="margin-left: 95%" id="MoveImage"
-                                            onclick="MoveDropify()" class="btn btn-danger">
+                                            onclick="MoveDropify('desktop')" res="desktop" class="btn btn-danger">
                                             <i class="fa fa-close"></i>
                                         </button>
                                         <input type="file" class="dropify" name="image_1" data-max-file-size="1M"
@@ -242,7 +129,7 @@
                                     @else
                                         <label for="image_1" class="form-label">Photo 1</label>
                                         <button type="button" style="margin-left: 95%" id="MoveImage"
-                                            onclick="MoveDropify()" class="btn btn-danger">
+                                            onclick="MoveDropify('desktop')" res="desktop" class="btn btn-danger">
                                             <i class="fa fa-close"></i>
                                         </button>
                                         <input type="file" class="dropify" name="image_1" data-max-file-size="1M"
@@ -250,35 +137,175 @@
                                             data-default-file="">
                                     @endif
                                 </div>
-                                @php
-                                    $additionalImages = json_decode($data->image_url2, true);
-                                @endphp
-                                <div class="col-sm-3" id="additional_images">
-                                    @if (is_array($additionalImages) || is_object($additionalImages))
-                                        @foreach ($additionalImages as $index => $imageUrl)
-                                            <div class="image-preview image{{ $index + 1 }}">
-                                                <label class="form-label">Photo {{ $index + 2 }}</label>
-                                                <button type="button" class="btn btn-danger delete-image-btn"
-                                                    data-image-index="{{ $index + 1 }}">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                                <input type="file" class="dropify custom-dropify"
-                                                    name="image_{{ $index + 2 }}" data-max-file-size="1M"
-                                                    data-allowed-file-extensions="jpg jpeg png gif"
-                                                    data-default-file="{{ asset('image_info/' . $imageUrl) }}">
-                                            </div>
-                                        @endforeach
+                                <div class="col-sm-3" id="additional_images2_desktop">
+                                    @php
+                                        $imageUrl2 = $data->image_url2 ?? null;
+                                    @endphp
+                                    @if ($imageUrl2)
+                                        <label for="image_2" class="form-label">Photo 2</label>
+                                        <button type="button" style="margin-left: 95%" id="MoveImage"
+                                            onclick="MoveDropify()" class="btn btn-danger">
+                                            <i class="fa fa-close"></i>
+                                        </button>
+                                        <input type="file" class="dropify" name="image_2" data-max-file-size="1M"
+                                            data-allowed-file-extensions="jpg jpeg png gif" image_list="1"
+                                            data-default-file="{{ asset('image_info/' . $imageUrl2) }}">
+                                    @else
+                                        <label for="image_2" class="form-label">Photo 1</label>
+                                        <button type="button" style="margin-left: 95%" id="MoveImage"
+                                            onclick="MoveDropify()" class="btn btn-danger">
+                                            <i class="fa fa-close"></i>
+                                        </button>
+                                        <input type="file" class="dropify" name="image_2" data-max-file-size="1M"
+                                            data-allowed-file-extensions="jpg jpeg png gif" image_list="1"
+                                            data-default-file="">
                                     @endif
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <div class="d-flex align-items-center">
-
+                            <div class="row justify-content-end">
+                                <div class="col-md-6">
+                                    <div class="submit-button text-right responsive-button">
+                                        <button type="submit" class="btn btn-primary" id="tomboladd"
+                                            style=" float: right; background-color: #FFB22B">Edit FAQ List</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="submit-button text-right responsive-button">
-                                <button type="submit" class="btn btn-primary"
-                                    style="margin-left: 90%; background-color: #FFB22B">+ Save FAQ To List</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="service-one my-5 mobile-show">
+        <div class="container-fluid">
+            <div class="row justify-content-left">
+                <div class="col-lg-12">
+                    <div class="outer-box p-5 shadow-lg rounded">
+                        <div class="block-title text-left">
+                            <div class="block-title__text"><span>Edit FAQ</span></div>
+                        </div>
+                        <form action="{{ route('FAQ.update', $data->id) }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="row mb-3">
+                                <!-- Date -->
+                                <div class="col-sm-5">
+                                    <label for="date" class="form-label">Date</label>
+                                    <input type="date" class="form-control" name="created_at"
+                                        value="{{ $data->created_at }}">
+                                </div>
+                                <div class="col-sm-5">
+                                    <label for="project" class="form-label">Pilih Client</label>
+                                    <select class="js-example-basic-single form-control" id="select-project"
+                                        name="id_project">
+                                        <option value="" selected disabled>Pilih Client</option>
+                                        @foreach ($project as $key => $item)
+                                            <option value="{{ $key }}"
+                                                {{ $data->id_project == $key ? 'selected' : '' }}>
+                                                {{ $item }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <!-- Pilih Site options -->
+                                <div class="col-sm-5">
+                                    <label for="project" class="form-label">Nama Site</label>
+                                    <select class="js-example-basic-single form-control" id="select-project"
+                                        name="id_site">
+                                        <option value="" selected disabled>Pilih Site</option>
+                                        @foreach ($sites as $key => $site)
+                                            <option value="{{ $key }}"
+                                                {{ $data->id_site == $key ? 'selected' : '' }}>
+                                                {{ $site }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <!-- Pertanyaan -->
+                                <div class="col-sm-5">
+                                    <label for="title" class="form-label">Pertanyaan</label>
+                                    <textarea id="{{-- mytextarea_pertanyaan --}}" style="height: 218px" class="form-control" name="pertanyaan"><?php echo strip_tags($data->pertanyaan); ?></textarea>
+                                </div>
+                                <!-- Jawaban -->
+                                <div class="col-sm-5">
+                                    <label for="description" class="form-label">Jawaban</label>
+                                    <textarea id="{{-- mytextarea_jawaban --}}" style="height: 218px" class="form-control" name="jawaban"><?php echo strip_tags($data->jawaban); ?></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mb-3" id="list_image_mobile">
+                                <!-- Image 1 -->
+                                <div class="col-sm-3" id="additional_images1_mobile">
+                                    @php
+                                        $imageUrl1 = $data->image_url ?? null;
+                                    @endphp
+                                    @if ($imageUrl1)
+                                        <label for="image_1" class="form-label">Photo 1</label>
+                                        <button type="button" style="margin-left: 95%" id="MoveImage"
+                                            onclick="MoveDropify('mobile')" class="btn btn-danger">
+                                            <i class="fa fa-close"></i>
+                                        </button>
+                                        <input type="file" class="dropify" name="image_1" data-max-file-size="1M"
+                                            data-allowed-file-extensions="jpg jpeg png gif" image_list="1"
+                                            data-default-file="{{ asset('image_info/' . $imageUrl1) }}">
+                                    @else
+                                        <label for="image_1" class="form-label">Photo 1</label>
+                                        <button type="button" style="margin-left: 95%" id="MoveImage"
+                                            onclick="MoveDropify('mobile')" class="btn btn-danger">
+                                            <i class="fa fa-close"></i>
+                                        </button>
+                                        <input type="file" class="dropify" name="image_1" data-max-file-size="1M"
+                                            data-allowed-file-extensions="jpg jpeg png gif" image_list="1"
+                                            data-default-file="">
+                                    @endif
+                                </div>
+                                <div class="col-sm-3" id="additional_images2_mobile">
+                                    @php
+                                        $imageUrl2 = $data->image_url2 ?? null;
+                                    @endphp
+                                    @if ($imageUrl2)
+                                        <label for="image_2" class="form-label">Photo 2</label>
+                                        <button type="button" style="margin-left: 95%" id="MoveImage"
+                                            onclick="MoveDropify()" class="btn btn-danger">
+                                            <i class="fa fa-close"></i>
+                                        </button>
+                                        <input type="file" class="dropify" name="image_2" data-max-file-size="1M"
+                                            data-allowed-file-extensions="jpg jpeg png gif" image_list="1"
+                                            data-default-file="{{ asset('image_info/' . $imageUrl2) }}">
+                                    @else
+                                        <label for="image_2" class="form-label">Photo 2</label>
+                                        <button type="button" style="margin-left: 95%" id="MoveImage"
+                                            onclick="MoveDropify()" class="btn btn-danger">
+                                            <i class="fa fa-close"></i>
+                                        </button>
+                                        <input type="file" class="dropify" name="image_2" data-max-file-size="1M"
+                                            data-allowed-file-extensions="jpg jpeg png gif" image_list="1"
+                                            data-default-file="">
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 d-flex justify-content-center">
+                                    <div class="button responsive-button sb-1">
+                                        <button type="button" id="PlusImage" onclick="AddDropify('mobile')"
+                                            class="btn btn-primary btn-block"
+                                            style="background-color:#2290FF;
+                                        ">
+                                            + Add Screenshot
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 d-flex justify-content-center">
+                                    <div class="submit-button responsive-button mt-3">
+                                        <button type="submit" class="btn btn-primary btn-block col-md-8" id="tomboladd"
+                                            style="background-color:#ECA918;
+                                        2B;">
+                                            Edit FAQ List
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -297,10 +324,46 @@
             selector: '#mytextarea_pertanyaan, #mytextarea_jawaban'
         });
 
+
         var maxImages = 2;
         var currentImageNum = 1;
 
-        function AddDropify() {
+        function MoveDropify(res) {
+            if (res == 'desktop') {
+                var lastRow = $('#additional_images2_desktop');
+                lastRow.remove();
+                if (currentImageNum === 0) {
+                    var firstImageRow = $('#additional_images1_desktop');
+                    firstImageRow.remove();
+                }
+
+                // Add hidden input fields for image deletion
+                if (currentImageNum === 0) {
+                    $('#list_image_desktop').append('<input type="hidden" name="delete_image_1" value="0">');
+                } else if (currentImageNum === 1) {
+                    $('#list_image_desktop').append('<input type="hidden" name="delete_image_2" value="0">');
+                }
+            } else {
+                var lastRow = $('#additional_images2_mobile');
+                lastRow.remove();
+                if (currentImageNum === 0) {
+                    var firstImageRow = $('#additional_images1_mobile');
+                    firstImageRow.remove();
+                }
+
+                // Add hidden input fields for image deletion
+                if (currentImageNum === 0) {
+                    $('#list_image_mobile').append('<input type="hidden" name="delete_image_1" value="0">');
+                } else if (currentImageNum === 1) {
+                    $('#list_image_mobile').append('<input type="hidden" name="delete_image_2" value="0">');
+                }
+            }
+
+            currentImageNum--;
+        }
+        /*    currentImageNum = 1; */
+
+        function AddDropify(res) {
             if (currentImageNum >= maxImages) {
                 alert('Maximum ' + maxImages + ' images allowed.');
                 return;
@@ -319,39 +382,24 @@
             var newRow = document.createElement('div');
             newRow.className = 'row';
             newRow.innerHTML = newImageInput;
-
-            document.getElementById('additional_images').appendChild(newRow);
+            if (res == 'desktop') {
+                document.getElementById('additional_images_desktop').appendChild(newRow);
+            } else {
+                document.getElementById('additional_images_mobile').appendChild(newRow);
+            }
 
             $('.custom-dropify').last().dropify();
             $('.image' + currentImageNum + ' .dropify').dropify();
         }
 
         function RemoveDropify(imageNum) {
-
-            var lastRow = $('#additional_images .row:last-child');
-            lastRow.remove();
-            currentImageNum--;
+            var imageContainer = $('#additional_images .col-sm-3').eq(imageNum - 1);
+            var dropifyInput = imageContainer.find('.dropify');
+            dropifyInput.val('');
+            dropifyInput.dropify('resetPreview');
         }
 
 
-
-        function MoveDropify() {
-            if (currentImageNum <= 1) {
-                alert('At least one image required.');
-                return;
-            }
-
-            var lastRow = $('#additional_images .row:last-child');
-            lastRow.remove();
-            currentImageNum--;
-
-
-            if (currentImageNum === 0) {
-                var firstImageRow = $('.col-sm-3:first-child');
-                firstImageRow.remove();
-                currentImageNum = 0;
-            }
-        }
 
         $(document).ready(function() {
             // Function to initialize Dropify
@@ -370,23 +418,7 @@
             // Initialize Dropify on page load
             initializeDropify();
 
-            // Attach click event to delete image button
-            $('.image-preview-container').on('click', '.delete-image-btn', function() {
-                var imageIndex = $(this).data('image-index');
-                removeImage(imageIndex);
-            });
 
-
-
-            function removeImage(index) {
-                var $imagePreview = $('.image' + index);
-                $imagePreview.remove();
-                currentImageNum--;
-            }
-
-
-
-            // Function to handle the maximum number of files
             $('.dropify').on('dropify.afterClear', function(event, element) {
                 var maxFiles = 2;
                 var files = $('.dropify').dropify('getFilesCount');
@@ -404,6 +436,7 @@
                 $input.val('');
                 alert('Invalid file(s) selected: ' + invalidFiles + '.');
             });
+
 
             // Function to handle form submission
             $('#editInfoForm').on('submit', function(e) {
